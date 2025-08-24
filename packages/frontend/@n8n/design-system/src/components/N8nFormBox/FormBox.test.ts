@@ -54,4 +54,45 @@ describe('FormBox', () => {
 		});
 		expect(container).toMatchSnapshot();
 	});
+
+	it('should render heading as h1 tag for accessibility', () => {
+		const { container } = render({
+			props: {
+				title: 'Set up owner account',
+				inputs: [],
+			},
+		});
+		
+		// Check that the heading is rendered as h1 element for accessibility
+		const heading = container.querySelector('h1');
+		expect(heading).toBeTruthy();
+		expect(heading?.textContent?.trim()).toBe('Set up owner account');
+	});
+
+	it('should associate form labels with inputs properly', () => {
+		const { container } = render({
+			props: {
+				title: 'Form Test',
+				inputs: [
+					{
+						name: 'email',
+						properties: {
+							label: 'Email Address',
+							type: 'email',
+							required: true,
+						},
+					},
+				],
+			},
+		});
+		
+		// Check that label has for attribute matching input name
+		const label = container.querySelector('label[for="email"]');
+		const input = container.querySelector('input[name="email"]');
+		
+		expect(label).toBeTruthy();
+		expect(input).toBeTruthy();
+		expect(label?.getAttribute('for')).toBe('email');
+		expect(input?.getAttribute('name')).toBe('email');
+	});
 });

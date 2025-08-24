@@ -47,7 +47,7 @@ const onSecondaryButtonClick = (event: Event) => emit('secondaryClick', event);
 <template>
 	<div :class="['n8n-form-box', $style.container]">
 		<div v-if="title" :class="$style.heading">
-			<N8nHeading size="xlarge">
+			<N8nHeading tag="h1" size="xlarge">
 				{{ title }}
 			</N8nHeading>
 		</div>

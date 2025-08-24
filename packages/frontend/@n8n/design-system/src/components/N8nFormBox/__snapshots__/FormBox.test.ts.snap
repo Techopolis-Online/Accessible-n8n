@@ -8,13 +8,13 @@ exports[`FormBox > should render the component 1`] = `
     <div
       class="heading"
     >
-      <span
+      <h1
         class="n8n-heading size-xlarge regular"
       >
         
         Title
         
-      </span>
+      </h1>
     </div>
     <div
       class="inputsContainer"

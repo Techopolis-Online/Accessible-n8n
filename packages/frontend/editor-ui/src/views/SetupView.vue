@@ -23,6 +23,7 @@ const router = useRouter();
 const loading = ref(false);
 const formConfig: IFormBoxConfig = reactive({
 	title: locale.baseText('auth.setup.setupOwner'),
+	titleTag: 'h1',
 	buttonText: locale.baseText('auth.setup.next'),
 	inputs: [
 		{

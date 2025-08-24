@@ -157,6 +157,10 @@ function getCustomClass() {
 		:data-test-id="`${name}-modal`"
 		:modal-class="center ? $style.center : ''"
 		:z-index="APP_Z_INDEXES.MODALS"
+		role="dialog"
+		:aria-labelledby="title ? `${name}-modal-title` : undefined"
+		:aria-describedby="subtitle ? `${name}-modal-subtitle` : undefined"
+		aria-modal="true"
 		@opened="onOpened"
 	>
 		<template v-if="$slots.header" #header>
@@ -165,10 +169,12 @@ function getCustomClass() {
 		<template v-else-if="title" #title>
 			<div :class="centerTitle ? $style.centerTitle : ''">
 				<div v-if="title">
-					<n8n-heading tag="h1" size="xlarge">{{ title }}</n8n-heading>
+					<n8n-heading :id="`${name}-modal-title`" tag="h1" size="xlarge">{{ title }}</n8n-heading>
 				</div>
 				<div v-if="subtitle" :class="$style.subtitle">
-					<n8n-heading tag="h3" size="small" color="text-light">{{ subtitle }}</n8n-heading>
+					<n8n-heading :id="`${name}-modal-subtitle`" tag="h2" size="small" color="text-light">{{
+						subtitle
+					}}</n8n-heading>
 				</div>
 			</div>
 		</template>

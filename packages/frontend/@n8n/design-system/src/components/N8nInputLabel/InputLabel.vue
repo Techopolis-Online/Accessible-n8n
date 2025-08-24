@@ -43,7 +43,6 @@ const addTargetBlank = (html: string) =>
 	>
 		<div :class="$style.labelRow">
 			<label
-				v-if="label || $slots.options"
 				:for="inputName"
 				:class="{
 					'n8n-input-label': true,
@@ -74,7 +73,14 @@ const addTargetBlank = (html: string) =>
 						:class="[$style.infoIcon, showTooltip ? $style.visible : $style.hidden]"
 					>
 						<N8nTooltip placement="top" :popper-class="$style.tooltipPopper" :show-after="300">
-							<N8nIcon :class="$style.icon" icon="circle-help" size="small" />
+							<N8nIcon
+								:class="$style.icon"
+								icon="circle-help"
+								size="small"
+								role="button"
+								:aria-label="`Help information for ${label}`"
+								tabindex="0"
+							/>
 							<template #content>
 								<div v-n8n-html="addTargetBlank(tooltipText)" />
 							</template>
@@ -101,6 +107,29 @@ const addTargetBlank = (html: string) =>
 						<slot name="issues" />
 					</div>
 				</div>
+
+				<!-- Default slot (input/control) is nested inside the label so
+						 the label is programmatically associated with the control for
+						 screen readers even when an explicit id/for is not provided. -->
+				<slot />
+
+				<!-- Hidden tooltip content for aria-describedby -->
+				<div
+					v-if="tooltipText"
+					:id="`${inputName}-tooltip`"
+					style="
+						position: absolute;
+						width: 1px;
+						height: 1px;
+						padding: 0;
+						margin: -1px;
+						overflow: hidden;
+						clip: rect(0, 0, 0, 0);
+						white-space: nowrap;
+						border: 0;
+					"
+					v-text="tooltipText"
+				/>
 			</label>
 			<div
 				v-if="$slots.persistentOptions"
@@ -110,7 +139,6 @@ const addTargetBlank = (html: string) =>
 				<slot name="persistentOptions" />
 			</div>
 		</div>
-		<slot />
 	</div>
 </template>
 

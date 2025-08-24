@@ -224,6 +224,16 @@ defineExpose({ inputRef });
 				:multiple="type === 'multi-select'"
 				:disabled="disabled"
 				:name="name"
+				:id="name"
+				:aria-describedby="
+					[
+						showErrors ? `${name}-error` : undefined,
+						infoText ? `${name}-info` : undefined,
+						tooltipText ? `${name}-tooltip` : undefined,
+					]
+						.filter(Boolean)
+						.join(' ') || undefined
+				"
 				:teleported="teleported"
 				:size="tagSize"
 				@update:model-value="onUpdateModelValue"
@@ -251,13 +261,23 @@ defineExpose({ inputRef });
 				:disabled="disabled"
 				:size="tagSize"
 				:autosize
+				:id="name"
+				:aria-describedby="
+					[
+						showErrors ? `${name}-error` : undefined,
+						infoText ? `${name}-info` : undefined,
+						tooltipText ? `${name}-tooltip` : undefined,
+					]
+						.filter(Boolean)
+						.join(' ') || undefined
+				"
 				@update:model-value="onUpdateModelValue"
 				@blur="onBlur"
 				@focus="onFocus"
 			/>
 		</div>
 		<div v-if="showErrors" :class="$style.errors">
-			<span v-text="validationError?.message" />
+			<span :id="`${name}-error`" v-text="validationError?.message" />
 			<N8nLink
 				v-if="documentationUrl && documentationText"
 				:to="documentationUrl"
@@ -269,7 +289,7 @@ defineExpose({ inputRef });
 			</N8nLink>
 		</div>
 		<div v-else-if="infoText" :class="$style.infoText">
-			<span size="small" v-text="infoText" />
+			<span :id="`${name}-info`" size="small" v-text="infoText" />
 		</div>
 	</N8nInputLabel>
 </template>

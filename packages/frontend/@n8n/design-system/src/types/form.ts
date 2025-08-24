@@ -77,6 +77,8 @@ export type FormValues = FormInputsToFormValues<IFormInput[], FormFieldValue>;
 
 export type IFormBoxConfig = {
 	title: string;
+	/** Optional tag to render the title with (e.g. 'h1', 'h2'). Keeps visual styles but allows semantic headings for accessibility. */
+	titleTag?: string;
 	buttonText?: string;
 	secondaryButtonText?: string;
 	inputs: IFormInputs;

@@ -19,6 +19,7 @@ interface FormBoxProps {
 	buttonLoading?: boolean;
 	secondaryButtonText?: string;
 	redirectText?: string;
+	titleTag?: string;
 	redirectLink?: string;
 }
 
@@ -28,6 +29,7 @@ withDefaults(defineProps<FormBoxProps>(), {
 	inputs: (): IFormInput[] => [],
 	buttonLoading: false,
 	redirectText: '',
+	titleTag: undefined,
 	redirectLink: '',
 });
 
@@ -47,7 +49,7 @@ const onSecondaryButtonClick = (event: Event) => emit('secondaryClick', event);
 <template>
 	<div :class="['n8n-form-box', $style.container]">
 		<div v-if="title" :class="$style.heading">
-			<N8nHeading size="xlarge">
+			<N8nHeading :tag="titleTag || 'span'" size="xlarge">
 				{{ title }}
 			</N8nHeading>
 		</div>

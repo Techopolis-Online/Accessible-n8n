@@ -47,6 +47,9 @@ const appendTo = useInjectTooltipAppendTo();
 		v-bind="{ ...props, ...$attrs }"
 		:append-to="props.appendTo ?? appendTo"
 		:popper-class="props.popperClass ?? 'n8n-tooltip'"
+		effect="dark"
+		trigger="hover focus"
+		role="tooltip"
 	>
 		<slot />
 		<template #content>

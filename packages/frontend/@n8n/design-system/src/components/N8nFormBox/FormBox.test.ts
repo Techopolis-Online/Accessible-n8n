@@ -62,7 +62,7 @@ describe('FormBox', () => {
 				inputs: [],
 			},
 		});
-		
+
 		// Check that the heading is rendered as h1 element for accessibility
 		const heading = container.querySelector('h1');
 		expect(heading).toBeTruthy();
@@ -85,11 +85,11 @@ describe('FormBox', () => {
 				],
 			},
 		});
-		
+
 		// Check that label has for attribute matching input name
 		const label = container.querySelector('label[for="email"]');
 		const input = container.querySelector('input[name="email"]');
-		
+
 		expect(label).toBeTruthy();
 		expect(input).toBeTruthy();
 		expect(label?.getAttribute('for')).toBe('email');
